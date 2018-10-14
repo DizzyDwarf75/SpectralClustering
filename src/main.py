@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
 
-from utils.similarity import calEuclidDistanceMatrix
+from utils.similarity import calEuclidDistanceMatrix , calEuclidDistanceMatrix_vector
 from utils.knn import myKNN
 from utils.laplacian import calLaplacianMatrix
 from utils.dataloader import genTwoCircles
@@ -10,11 +10,16 @@ from sklearn.cluster import KMeans
 import numpy as np
 np.random.seed(1)
 
+
+
 data, label = genTwoCircles(n_samples=500)
 
 Similarity = calEuclidDistanceMatrix(data)
 
-Adjacent = myKNN(Similarity, k=10)
+Similarity_v = calEuclidDistanceMatrix_vector(data)
+
+
+Adjacent = myKNN(Similarity, k=5)
 
 Laplacian = calLaplacianMatrix(Adjacent)
 
@@ -30,3 +35,7 @@ sp_kmeans = KMeans(n_clusters=2).fit(H)
 pure_kmeans = KMeans(n_clusters=2).fit(data)
 
 plot(data, sp_kmeans.labels_, pure_kmeans.labels_)
+
+
+# from IPython import embed
+# embed()

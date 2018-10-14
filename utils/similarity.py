@@ -14,3 +14,13 @@ def calEuclidDistanceMatrix(X):
             S[i][j] = 1.0 * euclidDistance(X[i], X[j])
             S[j][i] = S[i][j]
     return S
+
+
+def calEuclidDistanceMatrix_vector(X):
+
+    s = X.dot(X.T)
+
+    u = (X ** 2).sum(axis = 1)
+    u = u + u.reshape(-1,1)
+    return (u - 2 * s)
+
